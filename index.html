@@ -442,18 +442,6 @@
   <h2>Progressive Sync and Promotion Tools</h2>
   <div class="row grow" style="gap:50px;align-items:stretch;margin-top:20px">
     <div class="panel grow">
-      <h3>With Promotion Tool</h3>
-      <p>Only the <b>current environment</b> is out of sync. The rest stay on the old revision until promoted.</p>
-      <div class="col" style="gap:10px">
-        <div class="prow"><span class="pill">dev</span><div class="grid" data-sz="62" style="grid-template-columns:repeat(2,62px)" data-cells="gg"></div></div>
-        <div class="prow"><span class="pill">staging</span><div class="grid" data-sz="62" style="grid-template-columns:repeat(6,62px)" data-cells="gggggg"></div></div>
-        <div class="prow"><span class="pill">prod 1</span><div class="grid" data-sz="62" style="grid-template-columns:repeat(8,62px)" data-cells="pppppppp"></div></div>
-        <div class="prow"><span class="pill">prod 2</span><div class="grid" data-sz="62" style="grid-template-columns:repeat(8,62px)" data-cells="gggggggg"></div></div>
-        <div class="prow"><span class="pill">prod 3</span><div class="grid" data-sz="62" style="grid-template-columns:repeat(8,62px)" data-cells="gggggggg"></div></div>
-        <div class="prow"><span class="pill">prod 4</span><div class="grid" data-sz="62" style="grid-template-columns:repeat(8,62px)" data-cells="gggggggg"></div></div>
-      </div>
-    </div>
-    <div class="panel grow">
       <h3>Without Promotion Tool</h3>
       <p><b>All apps</b> are out of sync at once. The controller works through the batches slowly.</p>
       <div class="col" style="gap:10px">
@@ -463,6 +451,18 @@
         <div class="prow"><span class="sp"></span><div class="grid" data-sz="62" style="grid-template-columns:repeat(8,62px)" data-cells="pppppppp"></div></div>
         <div class="prow"><span class="sp"></span><div class="grid" data-sz="62" style="grid-template-columns:repeat(8,62px)" data-cells="oooooooo"></div></div>
         <div class="prow"><span class="sp"></span><div class="grid" data-sz="62" style="grid-template-columns:repeat(8,62px)" data-cells="oooooooo"></div></div>
+      </div>
+    </div>
+    <div class="panel grow">
+      <h3>With Promotion Tool</h3>
+      <p>Only the <b>current environment</b> is out of sync. The rest stay on the old revision until promoted.</p>
+      <div class="col" style="gap:10px">
+        <div class="prow"><span class="pill">dev</span><div class="grid" data-sz="62" style="grid-template-columns:repeat(2,62px)" data-cells="gg"></div></div>
+        <div class="prow"><span class="pill">staging</span><div class="grid" data-sz="62" style="grid-template-columns:repeat(6,62px)" data-cells="gggggg"></div></div>
+        <div class="prow"><span class="pill">prod 1</span><div class="grid" data-sz="62" style="grid-template-columns:repeat(8,62px)" data-cells="pppppppp"></div></div>
+        <div class="prow"><span class="pill">prod 2</span><div class="grid" data-sz="62" style="grid-template-columns:repeat(8,62px)" data-cells="gggggggg"></div></div>
+        <div class="prow"><span class="pill">prod 3</span><div class="grid" data-sz="62" style="grid-template-columns:repeat(8,62px)" data-cells="gggggggg"></div></div>
+        <div class="prow"><span class="pill">prod 4</span><div class="grid" data-sz="62" style="grid-template-columns:repeat(8,62px)" data-cells="gggggggg"></div></div>
       </div>
     </div>
   </div>
@@ -783,7 +783,6 @@
     <tr><td><b>Environment</b></td><td>GitOps Promoter · Kargo · custom pipelines</td><td>Bad revision reaching prod</td></tr>
     <tr><td><b>Application</b></td><td>Argo CD Progressive Sync</td><td>Bad change hitting every cluster at once</td></tr>
   </table>
-  <p class="caption">Together they complete the continuous-deployment puzzle for GitOps-native teams.</p>
 </section>
 
 <!-- 23 THANKS -->
@@ -876,14 +875,14 @@ function startCompare(){
   // rows: dev, staging, prod waves 1-4. Everything before prod wave 3 syncs fully; in wave 3 pods 3 and 4 fail (red),
   // pods 5-8 stay pending and wave 4 never starts. A row starts only after the previous row is done.
   const FAIL=4, NEVER=5, starts=[]; let t=1;
-  [...panels[0].querySelectorAll('.grid')].forEach((g,gi)=>{ if(gi>FAIL) return; starts[gi]=t; t+=1+0.5*Math.ceil(g.children.length/2)+0.3; });
+  [...panels[1].querySelectorAll('.grid')].forEach((g,gi)=>{ if(gi>FAIL) return; starts[gi]=t; t+=1+0.5*Math.ceil(g.children.length/2)+0.3; });
   const reset=starts[FAIL]+2+5, D=reset+1;
   panels.forEach((panel,pi)=>[...panel.querySelectorAll('.grid')].forEach((grid,w)=>[...grid.querySelectorAll('.c')].forEach((c,k)=>{
     const s=starts[Math.min(w,FAIL)], b=s+1+0.5*Math.floor(k/2), g=b+0.5;
-    const y=pi===0?s:starts[0];   // promotion: row turns yellow when its turn comes; progressive sync: all yellow at the start
+    const y=pi===1?s:starts[0];   // promotion: row turns yellow when its turn comes; progressive sync: all yellow at the start
     const K=[{offset:0,background:C.green}];
     const at=(tt,col)=>{K.push({offset:tt/D-e,background:K[K.length-1].background},{offset:tt/D,background:col})};
-    if(w===NEVER){ if(pi===1) at(y,C.yellow); }
+    if(w===NEVER){ if(pi===0) at(y,C.yellow); }
     else{
       at(y,C.yellow);
       if(w===FAIL&&k>=4){ /* pending, never synced */ }
