@@ -695,13 +695,18 @@
 <section class="slide">
   <div class="tag">Observability</div>
   <h2>New Metrics for Progressive Sync?</h2>
-  <div class="row grow" style="gap:40px">
-    <ul style="flex:1;font-size:36px">
-      <li>Apps per progressive-sync status (waiting / pending / progressing / healthy)</li>
-      <li>Rollout duration per step</li>
-      <li>Open question for the audience: what would you alert on?</li>
+  <div class="col grow" style="justify-content:center;gap:34px">
+    <ul style="font-size:30px">
+      <li>Application status per step — waiting / pending / progressing / healthy</li>
+      <li>Sync count per step, per ApplicationSet</li>
+      <li>Refresh count per ApplicationSet</li>
+      <li><b>Detection-to-sync latency</b>: time between spotting a needed sync and triggering it</li>
+      <li>Rollout duration — full sync and per step <i>(not yet merged)</i></li>
     </ul>
-    <div class="shot" style="flex:1">[Placeholder: metrics / dashboard]</div>
+    <div class="col" style="gap:18px">
+      <img src="assets/metrics_overview.jpeg" alt="Metrics overview" style="width:100%;display:block;border-radius:16px;border:3px solid var(--panel2)">
+      <img src="assets/metrics_sync_and_refreshes.jpeg" alt="Metrics: syncs and refreshes" style="width:100%;display:block;border-radius:16px;border:3px solid var(--panel2)">
+    </div>
   </div>
   <aside class="notes">Confirm whether metrics exist today or are proposals. Rephrase accordingly.</aside>
 </section>
