@@ -189,13 +189,13 @@
   .s18 pre{font-size:30px;padding:20px 28px}
   .s18 .box{padding:16px 28px;font-size:38px;min-width:0}.s18 .box small{font-size:24px;margin-top:2px}
   .s18 .arrow.dn{font-size:36px;line-height:1;text-align:center}
-  .sopt .panel{display:grid;grid-template-columns:0.7fr 1.5fr;gap:44px;align-items:center;padding:34px 44px}
+  .sopt .panel{display:grid;grid-template-columns:0.9fr 1.5fr;gap:44px;align-items:center;padding:24px 44px}
   .sopt .info{display:flex;flex-direction:column;gap:16px;min-width:0}
   .sopt .panel h3{font-size:44px;margin:0}
   .sopt .panel p{font-size:30px;margin:0}
   .sopt .panel .pill{align-self:flex-start;font-size:28px}
-  .sopt pre{font-size:30px;padding:24px 30px;overflow:hidden;min-width:0;margin:0}
-  .sopt code{font:28px ui-monospace,Menlo,monospace;color:var(--fg);background:#0b0e14;padding:2px 8px;border-radius:6px}
+  .sopt pre{font-size:24px;padding:24px 30px;overflow:hidden;min-width:0;margin:0}
+  .sopt code{font:28px ui-monospace,Menlo,monospace;color:var(--fg);background:#0b0e14;padding:2px 8px;border-radius:6px;white-space:nowrap}
   .sopt .caption a{color:var(--orange)}
   .s16 .callout{border-left-color:var(--green);background:rgba(63,191,127,.1)}
   .s16 .callout b{color:var(--green)}
@@ -209,6 +209,7 @@
   .s22 .panel p{font-size:36px;margin-bottom:28px}
   .s22 .fill{margin-top:auto;margin-bottom:auto;width:100%;border-radius:16px;border:3px solid var(--panel2)}
   .s22 .shot.fill{height:340px;margin-block:auto}
+  .s21 .fill{margin-top:auto;margin-bottom:auto;width:100%;height:400px;object-fit:contain;border-radius:16px;border:3px solid var(--panel2)}
   aside.notes{display:none}
   #notes{position:fixed;left:0;right:0;bottom:0;max-height:30vh;overflow:auto;background:rgba(0,0,0,.88);color:#dfe5f3;font-size:18px;line-height:1.45;padding:16px 28px;display:none;z-index:10}
   body.shownotes #notes{display:block}
@@ -505,14 +506,14 @@
 <section class="slide sopt">
   <div class="tag">How It Works</div>
   <h2>Opting In: Two Separate Switches</h2>
-  <div class="col grow" style="gap:26px;margin-top:10px">
-    <div class="panel grow">
-      <div class="info"><span class="pill orange">Step 1</span><h3>Enable It on the Controller</h3><p>Or pass <code>--enable-progressive-syncs</code>, or set <code>ARGOCD_APPLICATIONSET_CONTROLLER_ENABLE_PROGRESSIVE_SYNCS=true</code>.</p></div>
-<pre style="font-size:26px"><span class="c"># argocd-cmd-params-cm</span>
+  <div class="col" style="gap:18px;margin-top:4px">
+    <div class="panel" style="height:362px">
+      <div class="info"><span class="pill orange">Step 1</span><h3>Enable It on the Controller</h3><p>pass <code>--enable-progressive-syncs</code><br>or set<br><code>ARGOCD_APPLICATIONSET_CONTROLLER_ENABLE_PROGRESSIVE_SYNCS=true</code></p></div>
+<pre><span class="c"># argocd-cmd-params-cm</span>
 <span class="k">data:</span>
   <span class="h"><span class="k">applicationsetcontroller.enable.progressive.syncs:</span></span> <span class="s">"true"</span></pre>
     </div>
-    <div class="panel grow">
+    <div class="panel" style="height:362px">
       <div class="info"><span class="pill orange">Step 2</span><h3>Set the Strategy in the ApplicationSet</h3><p>Define the steps under <code>rollingSync</code> (next slide).</p></div>
 <pre><span class="k">kind:</span> ApplicationSet
 <span class="k">spec:</span>
@@ -520,7 +521,7 @@
     <span class="h"><span class="k">type:</span> <span class="s">RollingSync</span></span></pre>
     </div>
   </div>
-  <p class="caption" style="margin-top:24px">Docs: <a href="https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Progressive-Syncs/" target="_blank" rel="noopener">argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Progressive-Syncs</a></p>
+  <p class="caption" style="margin-top:14px">Docs: <a href="https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Progressive-Syncs/" target="_blank" rel="noopener">argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Progressive-Syncs</a></p>
   <aside class="notes">Two separate switches: one global on the ApplicationSet controller, one per ApplicationSet. Source: Argo CD docs, Progressive Syncs. Replace the YAML visuals with real screenshots if you prefer.</aside>
 </section>
 
@@ -599,11 +600,11 @@
   <p class="sub">Is a change a new Git revision? <b>Nooo.</b> It's more complicated.</p>
   <div class="row grow" style="gap:50px;align-items:center;margin-top:10px">
   <ul style="flex:1">
+    <li>Several generators/sources can contribute to one Application</li>
+    <li>The controller must tell "needs a rollout" from "just refresh"</li>
     <li>A new commit may not change <em>this</em> Application's rendered manifests</li>
     <li>A change can be a spec edit on the Application itself (source, values, target revision…)</li>
-    <li>Several generators/sources can contribute to one Application</li>
     <li>A <b>refresh</b> is triggered as soon as we detect an Application may have a new revision</li>
-    <li>The controller must tell "needs a rollout" from "just refresh"</li>
   </ul>
   <div class="row" style="flex:1;justify-content:center;align-items:center;gap:30px">
     <div class="col" style="gap:28px">
@@ -652,23 +653,22 @@
 </section>
 
 <!-- 16 COMPLEXITY 2 -->
-<section class="slide">
+<section class="slide s21">
   <div class="tag">Complexity</div>
-  <h2>Which Wave Are We In? What Went Wrong?</h2>
-  <div class="row grow" style="gap:50px;align-items:stretch">
-    <ul style="flex:1;font-size:36px">
-      <li>Knowing when wave 1 is finished and wave 2 may start</li>
-      <li>Invalid rollout config surfaces as an <b>ApplicationSet condition</b></li>
-    </ul>
-    <div style="flex:1.2;display:flex;flex-direction:column;gap:20px;min-height:0">
-      <div style="flex:1;display:flex;flex-direction:column;gap:8px;min-height:0">
-        <img src="assets/appset_condition_error.jpeg" alt="ApplicationSet condition error" style="flex:1;min-height:0;width:100%;height:100%;border-radius:16px;border:3px solid var(--panel2);object-fit:contain">
-        <div style="text-align:center;color:var(--muted);font-size:22px">Error</div>
-      </div>
-      <div style="flex:1;display:flex;flex-direction:column;gap:8px;min-height:0">
-        <img src="assets/appset_condition_warning.jpeg" alt="ApplicationSet condition warning" style="flex:1;min-height:0;width:100%;height:100%;border-radius:16px;border:3px solid var(--panel2);object-fit:contain">
-        <div style="text-align:center;color:var(--muted);font-size:22px">Warning</div>
-      </div>
+  <h2>What Went Wrong?</h2>
+  <ul style="font-size:36px;margin-bottom:6px">
+    <li>Invalid rollout config surfaces as an <b>ApplicationSet condition</b></li>
+  </ul>
+  <div class="row grow" style="gap:40px;align-items:stretch">
+    <div class="panel grow">
+      <h3>Error</h3>
+      <p>Blocks the rollout until the config is fixed.</p>
+      <img class="fill" src="assets/appset_condition_error.jpeg" alt="ApplicationSet condition error">
+    </div>
+    <div class="panel grow">
+      <h3>Warning</h3>
+      <p>Surfaced for visibility; the rollout continues.</p>
+      <img class="fill" src="assets/appset_condition_warning.jpeg" alt="ApplicationSet condition warning">
     </div>
   </div>
 </section>
