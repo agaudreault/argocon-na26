@@ -7,7 +7,7 @@
 <style>
   :root{
     --bg:#12161f; --panel:#1c2230; --panel2:#252d3f; --fg:#eef1f7; --muted:#9aa5bd;
-    --orange:#ef7b4d; --green:#3fbf7f; --red:#e5484d; --blue:#4c9aff; --amber:#f5b942; --gray:#4a546b;
+    --orange:#ef7b4d; --green:#3fbf7f; --red:#e5484d; --blue:#4c9aff; --amber:#f5b942; --gray:#4a546b; --purple:#a371f7;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%;background:#000;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--fg)}
@@ -618,37 +618,50 @@
       </div>
       <div class="row" style="align-items:center;gap:16px;min-height:84px;position:relative">
         <svg viewBox="0 0 16 16" width="56" height="56" fill="var(--muted)"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-        <span class="s20-commit" style="position:absolute;top:-4px;left:38px;width:18px;height:18px;border-radius:50%;background:var(--red);box-shadow:0 0 0 5px rgba(229,72,77,.3);opacity:0"></span>
-        <div class="arrow seq" style="font-size:38px">→</div>
+        <div class="arrow seq s20-merge-arrow" style="font-size:38px">→</div>
+        <span class="s20-incoming-sha" style="position:absolute;top:58px;left:58px;font-family:ui-monospace,Menlo,monospace;font-size:20px;font-weight:700;color:var(--purple);white-space:nowrap;opacity:0">3f7a88</span>
       </div>
     </div>
 
-    <div class="pgroup" style="flex-direction:column;align-items:stretch;justify-content:center;flex:none;width:620px;gap:28px;padding:54px 54px 30px">
+    <div class="pgroup" style="flex-direction:column;align-items:stretch;justify-content:center;flex:none;width:460px;gap:28px;padding:54px 40px 30px">
       <span class="plabel">ApplicationSet</span>
       <div class="row" style="align-items:center;gap:26px;min-height:84px;position:relative">
         <div style="position:relative;width:84px;height:84px">
           <div class="c n s20-c1" style="width:84px;height:84px"></div>
           <svg class="s20-r1 spin" style="position:absolute;top:50%;left:50%;width:36px;height:36px;margin:-18px 0 0 -18px;opacity:0" viewBox="0 0 24 24" fill="#fff"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
         </div>
-        <b style="font-size:28px;color:var(--muted)">Wave 1 · App 1</b>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <b style="font-size:28px;color:var(--muted)">Wave 1 · App 1</b>
+          <span style="font-family:ui-monospace,Menlo,monospace;font-size:20px;color:var(--muted)">a93f2c</span>
+        </div>
       </div>
       <div class="row" style="align-items:center;gap:26px;min-height:84px;position:relative">
         <div style="position:relative;width:84px;height:84px">
           <div class="c n s20-c2" style="width:84px;height:84px"></div>
           <svg class="s20-r2 spin" style="position:absolute;top:50%;left:50%;width:36px;height:36px;margin:-18px 0 0 -18px;opacity:0" viewBox="0 0 24 24" fill="#fff"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
         </div>
-        <b style="font-size:28px;color:var(--muted)">Wave 2 · App 2</b>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <b style="font-size:28px;color:var(--muted)">Wave 2 · App 2</b>
+          <span style="font-family:ui-monospace,Menlo,monospace;font-size:20px;color:var(--muted)">7e41d9</span>
+        </div>
       </div>
       <div class="row" style="align-items:center;gap:26px;min-height:84px;position:relative">
         <div style="position:relative;width:84px;height:84px">
           <div class="c n s20-c3" style="width:84px;height:84px"></div>
           <svg class="s20-r3 spin" style="position:absolute;top:50%;left:50%;width:36px;height:36px;margin:-18px 0 0 -18px;opacity:0" viewBox="0 0 24 24" fill="#fff"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
         </div>
-        <b style="font-size:28px;color:var(--muted)">Wave 3 · App 3</b>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <b style="font-size:28px;color:var(--muted)">Wave 3 · App 3</b>
+          <span style="position:relative;display:block;height:26px;font-family:ui-monospace,Menlo,monospace;font-size:20px;color:var(--muted)">
+            <span class="s20-sha3-old" style="position:absolute;left:0;top:0">9c05b1</span>
+            <span class="s20-sha3-new" style="position:absolute;left:0;top:0;opacity:0">3f7a88</span>
+          </span>
+        </div>
       </div>
     </div>
   </div>
   </div>
+  <p class="caption" style="margin-top:14px">More info: <a href="https://github.com/argoproj/argo-cd/pull/27467" target="_blank" rel="noopener" style="color:var(--blue);text-decoration:underline;text-underline-offset:6px">github.com/argoproj/argo-cd/pull/27467</a></p>
   <aside class="notes">Scenario: 3 Applications in 3 waves, each from a different source repo. A commit lands only in Repo C (Wave 3's source) — it doesn't touch Wave 1 or Wave 2's manifests. But the controller still refreshes App 1 (already synced) to rule out stale data; finding no diff, App 1 goes Waiting → Pending → Healthy without ever entering Progressing, so no needless sync happens. That Healthy transition then unlocks the same check on Wave 2.</aside>
 </section>
 
@@ -671,6 +684,7 @@
       <img class="fill" src="assets/appset_condition_warning.jpeg" alt="ApplicationSet condition warning">
     </div>
   </div>
+  <p class="caption" style="margin-top:14px">More info: <a href="https://github.com/argoproj/argo-cd/pull/27820" target="_blank" rel="noopener" style="color:var(--blue);text-decoration:underline;text-underline-offset:6px">github.com/argoproj/argo-cd/pull/27820</a></p>
 </section>
 
 <!-- 17 UI -->
@@ -914,9 +928,9 @@ function startAuto(){
 // slide 20: a commit in Repo C's App ripples backward and refreshes App 1, then App 2 (no diff -> straight to Healthy)
 function startChange(){
   const sl=document.querySelector('.s20'); if(!sl) return;
-  sl.querySelectorAll('.c,.s20-commit,.s20-r1,.s20-r2,.s20-r3').forEach(el=>el.getAnimations().forEach(a=>a.cancel()));
+  sl.querySelectorAll('.c,.s20-merge-arrow,.s20-incoming-sha,.s20-r1,.s20-r2,.s20-r3,.s20-sha3-old,.s20-sha3-new').forEach(el=>el.getAnimations().forEach(a=>a.cancel()));
   if(!slides[cur].classList.contains('s20')||matchMedia('(prefers-reduced-motion:reduce)').matches) return;
-  const COL={gray:'#4a546b',amber:'#f5b942',blue:'#4c9aff',green:'#3fbf7f'}, D=9, e=0.0004;
+  const COL={gray:'#4a546b',amber:'#f5b942',blue:'#4c9aff',green:'#3fbf7f',orange:'#ef7b4d',purple:'#a371f7'}, D=9, e=0.0004;
   const anim=(sel,prop,initial,pairs)=>{
     const el=sl.querySelector(sel); if(!el) return;
     const K=[{offset:0,[prop]:initial}];
@@ -927,10 +941,13 @@ function startChange(){
   anim('.s20-c1','background',COL.gray,[[1.8,COL.green],[8,COL.gray]]);
   anim('.s20-c2','background',COL.gray,[[2.5,COL.green],[8,COL.gray]]);
   anim('.s20-c3','background',COL.gray,[[1.3,COL.amber],[2.8,COL.blue],[6.0,COL.green],[8,COL.gray]]);
-  anim('.s20-commit','opacity',0,[[1.0,1],[7.5,0]]);
+  anim('.s20-merge-arrow','color',COL.orange,[[1.0,COL.purple],[6.0,COL.orange]]);
+  anim('.s20-incoming-sha','opacity',0,[[1.0,1],[6.0,0]]);
   anim('.s20-r3','opacity',0,[[1.0,1],[1.3,0]]);
   anim('.s20-r1','opacity',0,[[1.5,1],[1.8,0]]);
   anim('.s20-r2','opacity',0,[[2.2,1],[2.5,0]]);
+  anim('.s20-sha3-old','opacity',1,[[6.0,0],[8,1]]);
+  anim('.s20-sha3-new','opacity',0,[[6.0,1],[8,0]]);
 }
 function show(i){cur=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,j)=>s.classList.toggle('active',j===cur));
   const n=slides[cur].querySelector('aside.notes');notes.textContent=n?n.textContent:'(no notes)';history.replaceState(null,'','#'+(cur+1));startWaves();startProg();startCompare();startAuto();startChange()}
